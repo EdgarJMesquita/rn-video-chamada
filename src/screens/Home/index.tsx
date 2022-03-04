@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   ActivityIndicator,
   Share,
@@ -6,15 +6,21 @@ import {
   TextInput,
   TouchableOpacity,
   View,
-} from 'react-native';
-import { styles } from './styles';
-import * as Linking from 'expo-linking';
-import { Feather } from '@expo/vector-icons';
-import { UsePeer } from '../../hooks/UsePeer';
-import { NavigatorScreenProps } from '../../routes/types';
+} from "react-native";
+import { styles } from "./styles";
+import * as Linking from "expo-linking";
+import { Feather } from "@expo/vector-icons";
+import { UsePeer } from "../../hooks/UsePeer";
+import { NavigatorScreenProps } from "../../routes/types";
 
 export function Home({ navigation }: NavigatorScreenProps) {
   const { callerId, calleeId, isCalling, handleCall, setCalleeId } = UsePeer();
+
+  console.log(
+    Linking.createURL("videochamada", {
+      queryParams: { id: "huosdhkajdjakd" },
+    })
+  );
 
   return (
     <View style={styles.container}>
@@ -24,15 +30,17 @@ export function Home({ navigation }: NavigatorScreenProps) {
           style={styles.field}
           onPress={() =>
             Share.share({
-              message: callerId,
-              title: 'Compartilhe seu ID',
+              message: Linking.createURL("videochamada", {
+                queryParams: { id: callerId },
+              }),
+              title: "Compartilhe seu ID",
             })
           }
         >
           <Text numberOfLines={1} style={[styles.title, { flex: 1 }]}>
-            {callerId || 'Carregando'}
+            {callerId || "Carregando"}
           </Text>
-          <Feather name="paperclip" size={20} color={'rgba(0,0,0,0.8)'} />
+          <Feather name="paperclip" size={20} color={"rgba(0,0,0,0.8)"} />
         </TouchableOpacity>
         <Text style={styles.title}>ID para chamar:</Text>
         <TextInput

@@ -1,4 +1,4 @@
-package com.davidnmagalhaes.rnpeerjsdemo;
+package com.xongas.videochamadas;
 
 import android.os.Build;
 import android.os.Bundle;
